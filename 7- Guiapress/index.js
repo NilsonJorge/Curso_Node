@@ -1,17 +1,25 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser')
-const connection = require('./database/database')
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const connection = require('./database/database');
 
 const categoriesController = require('./categories/CategoriesController');
 const articlesController = require('./articles/ArticlesController');
+const usersController = require('./users/UsersController');
 
-const Article = require('./articles/Article')
+const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+const User = require('./users/User');
 const { where } = require('sequelize');
 
 //View engine
 app.set('view engine', 'ejs');
+
+//Sessions
+app.use(session({
+    secret: 'fsdfssdbwevsdvgtgjhyjugbngj', cookie: { maxAge: 30000}
+}))
 
 //Static
 app.use(express.static('public'))
@@ -32,6 +40,10 @@ connection.authenticate()
 app.use("/", categoriesController);
 
 app.use('/', articlesController);
+
+app.use('/', usersController);
+
+
 
 app.get("/", (req,res) => {
     Article.findAll({

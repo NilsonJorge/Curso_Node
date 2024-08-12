@@ -10,3 +10,7 @@
 
     npm install --save sequelize
     npm install --save mysql2
+
+## Iniciar servidor
+
+    nodemon start

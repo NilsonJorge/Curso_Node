@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const connection = require("./database/database");
 const Pergunta = require("./database/Pergunta");
@@ -18,6 +19,7 @@ connection
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(cors())
 
 //Body parser
 app.use(bodyParser.urlencoded({extended:false}));
@@ -31,6 +33,15 @@ app.get("/", (req,res) => {
         res.render('index',{
             perguntas: perguntas
         })
+    })
+   
+});
+
+app.get("/api", (req,res) => {
+    Pergunta.findAll({raw: true, order:[
+        ['id','desc']
+    ]}).then(perguntas => {
+        res.json(perguntas)
     })
    
 });

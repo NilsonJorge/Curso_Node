@@ -16,4 +16,18 @@ function func2() {
 }
 
 func1();
-func2();
+// func2();
+console.log("=====================================");
+
+let a = 10;
+let testar = true;
+
+if (testar) {
+  let b = 20; //bloco
+  console.log(a + b);
+}
+
+{
+  let c = 30;
+  console.log(a + c);
+}

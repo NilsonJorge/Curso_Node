@@ -31,3 +31,15 @@ if (testar) {
   let c = 30;
   console.log(a + c);
 }
+
+function soma(a = 20, b = 50) {
+  console.log(a + b);
+}
+
+function sub(a, b, inverter = false) {
+  if (inverter) {
+    console.log(b - a);
+  } else {
+    console.log(a - b);
+  }
+}
